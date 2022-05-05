@@ -40,9 +40,17 @@ app.get("/", (req, res) => {
 app.get("/search", async (req, res) => {
   // Omitted validation check
   const totRecs = await dblib.getTotalRecords();
+  //Create an empty product object (To populate form with values)
+  const prod = {
+      prod_id: "",
+      prod_name: "",
+      prod_desc: "",
+      prod_price: ""
+  };
   res.render("search", {
       type: "get",
-      totRecs: totRecs.totRecords
+      totRecs: totRecs.totRecords,
+      prod: prod
   });
 });
 
@@ -71,22 +79,7 @@ app.post("/search", async (req, res) => {
       });
 });
 
-app.get("/search", async (req, res) => {
-  // Omitted validation check
-  const totRecs = await dblib.getTotalRecords();
-  //Create an empty product object (To populate form with values)
-  const prod = {
-      prod_id: "",
-      prod_name: "",
-      prod_desc: "",
-      prod_price: ""
-  };
-  res.render("search", {
-      type: "get",
-      totRecs: totRecs.totRecords,
-      prod: prod
-  });
-});
+
 
 app.get("/searchajax", async (req, res) => {
   // Omitted validation check
